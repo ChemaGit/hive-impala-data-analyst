@@ -7,7 +7,7 @@
 ### Technologies
 ````text
 - The technologies related with this certification are:
-    - Hive
+    - Hive: Create databases, tables, HiveQL, Windowing Functions
     - Impala
     - Sqoop
     - HDFS command line
