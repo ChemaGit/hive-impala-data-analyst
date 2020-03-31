@@ -1,9 +1,10 @@
 /**
 INSERTING DATA INTO ORDER_ITEMS USING STAGE TABLE
 Let us understand how to insert data into order_items with PARQUET file format.
-As data is in text file format and our table is created with PARQUET file format, we will not be able to use LOAD command to load the data.
-Following are the steps to get data into table which is created using different file format or delimiter than our source data.
-
+As data is in text file format and our table is created with PARQUET file format,
+we will not be able to use LOAD command to load the data.
+Following are the steps to get data into table
+which is created using different file format or delimiter than our source data.
 We need to create stage table with text file format and comma as delimiter (order_items_stage).
 Load data from our files in local file system to stage table.
 Using stage table run insert command to insert data into our target table (order_items).

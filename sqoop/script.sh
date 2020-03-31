@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Tab delimited
+# Using tab delimited
 sqoop import \
 --connect jdbc:mysql://dev.loudacre.com/loudacre \
 --username training --password training \

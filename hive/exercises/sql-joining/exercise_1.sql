@@ -1,5 +1,5 @@
-/*
-find total orders and total amount per status per day
+/**
+Find total orders and total amount per status per day
 The result should be sorted by order date in descending, order status in ascending
 and total amount in descending and total orders in ascending
 order_date should be YYYY-MM-DD format

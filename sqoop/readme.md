@@ -19,8 +19,8 @@ sqoop tool-name [tool-options]
 # This command will list all tables in the loudacre DB in MySQL
 sqoop list-tables \
 --connect jdbc:mysql://dev.loudacre.com/loudacre \
---username twheeler \
---password bigsecret
+--username wheeler \
+--password big_secret
 ````
 
 ### Basic import and export
