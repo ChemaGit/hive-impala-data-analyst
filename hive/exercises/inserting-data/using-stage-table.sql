@@ -39,7 +39,11 @@ INSERT INTO TABLE order_items SELECT * FROM order_items_stage;
 
 DESCRIBE FORMATTED order_items;
 
-SELECT COUNT(*) order_items;
-SELECT * FROM order_items LIMIT 10;
+SELECT COUNT(*)
+order_items;
+
+SELECT *
+FROM order_items
+LIMIT 10;
 
 DROP TABLE order_items_stage;
