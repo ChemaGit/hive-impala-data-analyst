@@ -6,6 +6,10 @@
 
 ### Technologies
 ````text
-
+- The technologies related with this certification are:
+    - Hive
+    - Impala
+    - Sqoop
+    - HDFS command line
 ````
 
