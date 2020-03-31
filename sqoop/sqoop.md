@@ -85,7 +85,7 @@ sqoop import --table accounts \
 # Importar parcialmente los datos de una tabla:
 sqoop import \
 --table accounts \
---connect jdbc:mysql://dbhost/loudacre \
+--connect jdbc:mysql://dbhost/loudacre \ 
 --username dbuser \
 --password pw \
 --columns "id,first_name,last_name,state"

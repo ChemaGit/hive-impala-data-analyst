@@ -253,7 +253,7 @@ hdfs dfs -tail /loudacre/accounts/part-m-00003
 sqoop import \
 --connect jdbc:mysql://dev.loudacre.com/loudacre \
 --username training --password training \
---incremental append \
+--incremental append \ 
 --null-string '\\N' \
 --null-non-string '\\N' \
 --table accounts \
