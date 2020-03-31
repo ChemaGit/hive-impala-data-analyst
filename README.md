@@ -9,7 +9,7 @@
 - The technologies related with this certification are:
     - Hive: Create databases, tables, HiveQL, Windowing Functions
     - Impala
-    - Sqoop
+    - Sqoop: Import, hive-import, incremental-import, Export
     - HDFS command line
 ````
 
