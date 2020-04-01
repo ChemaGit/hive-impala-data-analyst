@@ -7,7 +7,7 @@
 
 - You can check the syllabus of the exam in the following link: 
 ````
-[https://www.cloudera.com/about/training/certification/cca-data-analyst.html][Cloudera Web page]
+[https://www.cloudera.com/about/training/certification/cca-data-analyst.html][ClouderaWebPage]
 
 ### Technologies
 ````text
@@ -24,3 +24,5 @@
 
 
 [QuickstartVM]: https://hub.docker.com/r/cloudera/quickstart
+
+[ClouderaWebPage]: https://www.cloudera.com/about/training/certification/cca-data-analyst.html
