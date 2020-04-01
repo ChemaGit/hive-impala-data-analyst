@@ -277,6 +277,46 @@ hdfs dfs -cat /loudacre/accounts/part-m-00004
 hdfs dfs -cat /loudacre/accounts/part-m-00005
 hdfs dfs -cat /loudacre/accounts/part-m-00006
 hdfs dfs -cat /loudacre/accounts/part-m-00007
+
+# create a hive table, only metastore data with a definition for a table based on a database table previously imported to HDFS, 
+# or one planned to be imported.
+sqoop create-hive-table \
+--connect jdbc:mysql://localhost/loudacre \
+--username training  -P \
+--table accounts \
+--hive-table accounts
+
+# The job tool allows you to create and work with saved jobs. 
+# Saved jobs remember the parameters used to specify a job, so they can be re-executed by invoking the job by its handle.
+sqoop job \
+--create myjob \
+-- import \
+--connect jdbc:mysql://localhost/retail_db \
+--username training \
+--password training \
+--table categories \
+--warehouse-dir /categories_target_job \
+--outdir /home/training/Desktop/outdir \
+--bindir /home/training/Desktop/bindir \
+--num-mappers 8
+
+# The merge tool allows you to combine two datasets where entries in one dataset should overwrite entries of an older dataset. 
+# For example, an incremental import run in last-modified mode will generate multiple datasets in HDFS where successively newer data appears in each dataset. 
+# The merge tool will "flatten" two datasets into one, taking the newest available records for each primary key.
+sqoop merge \
+--class-name products_replica \
+--jar-file /home/training/Desktop/bindir/products_replica.jar \
+--new-data /user/cloudera/problem5/products-text-part1/ \
+--onto /user/cloudera/problem5/products-text-part2/ \
+--target-dir /user/cloudera/problem5/products-text-both-parts \
+--merge-key product_id
+
+# Step 2: list the jobs
+sqoop job --list
+# Step 3: Describe the job
+sqoop job --show myjob
+# Step 4: Execute the job
+sqoop job --exec myjob
 ````
 
 ### BONUS EXERCISE

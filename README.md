@@ -1,9 +1,13 @@
 ## hive-impala-data-analyst
 ````text
-- This repository is all about Hive and Impala technologies, and the CCA159 Data Analyst Cloudera certification.
-- In this repository I want to and share and describe all aspects to achieve the CCA159 Data Analyst Cloudera certification.
+- This repository is all about Hive and Impala technologies, 
+  and the CCA159 Data Analyst Cloudera certification.
 
-- I hope this repository will be helpful for everyone who wants to achive the CCA159 Data Analyst Cloudera certification.
+- In this repository I want to and share and describe all aspects to achieve 
+  the CCA159 Data Analyst Cloudera certification.
+
+- I hope this repository will be helpful for everyone who wants to achive 
+  the CCA159 Data Analyst Cloudera certification.
 
 - You can check the syllabus of the exam in the following link: 
 ````
@@ -12,9 +16,11 @@
 ### Technologies
 ````text
 - The technologies related with this certification are:
-    - Hive: Create databases, tables, HiveQL, Windowing Functions
+    - Hive: Create databases, tables, HiveQL, Partitioning, 
+      Bucketing, Windowing Functions and so on...
     - Impala: Create databases, tables, HiveQL, Windowing Functions
-    - Sqoop: Import, hive-import, incremental-import, Export and so on.
+    - Sqoop: Import, hive-import, incremental-import, Export and so on 
+      (Sqoop was recently removed from the certification exam)
     - HDFS command line
 
 - I am using the Cloudera Virtual Machine
