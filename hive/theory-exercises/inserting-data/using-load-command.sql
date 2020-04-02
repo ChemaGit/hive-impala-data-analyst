@@ -14,5 +14,7 @@ DESCRIBE orders;
 
 TRUNCATE order_items;
 
-INSERT INTO OVERWRITE TABLE order_items
-SELECT * FROM order_items_stage;
+INSERT INTO OVERWRITE TABLE order_items;
+
+SELECT *
+FROM order_items_stage;

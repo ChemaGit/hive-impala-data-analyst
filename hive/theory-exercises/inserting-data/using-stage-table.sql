@@ -41,7 +41,7 @@ INSERT INTO TABLE order_items SELECT * FROM order_items_stage;
 DESCRIBE FORMATTED order_items;
 
 SELECT COUNT(*)
-order_items;
+FROM order_items;
 
 SELECT *
 FROM order_items
