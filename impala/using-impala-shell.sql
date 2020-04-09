@@ -31,3 +31,13 @@ $ impala-shell --quiet --delimited --print_header --output_delimiter='\t' -q 'US
 $ impala-shell --quiet --delimited --output_delimiter=',' --print_header -q 'USE fun; SELECT * FROM games' -o /home/training/assigments/UsingBeelineAndImpalaShellInNonIteractiveMode/impala_fun_games.csv
 $ impala-shell --quiet --delimited --print_header --output_delimiter='\t' -q 'USE fun; SELECT * FROM games' -o /home/training/assigments/UsingBeelineAndImpalaShellInNonIteractiveMode/impala_fun_games.tsv
 $ impala-shell -q 'SELECT * FROM fun.games' -o /home/training/assigments/UsingBeelineAndImpalaShellInNonIteractiveMode/impala_fun_games.txt
+
+-- USING VARIABLES WITH IMPALA-SHELL
+
+-- The only difference with HIVE is: use var instead of hivevar
+
+-- hex_color_impala.sql
+
+SELECT hex FROM wax.crayons WHERE color = '${var:color}';
+
+$ impala-shell --var color="Purple Mountains\' Majesty" -f /home/training/assigments/UsingHiveAndImpalaInScriptsApplications/hex_color_impala.sql
