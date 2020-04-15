@@ -265,3 +265,60 @@ FROM  TBLS;
 $ cd /usr/lib/hive/conf
 $ view hive-site.xml
 ````
+
+### Overview of Beeline-Alternative to Hive CLI
+````text
+Let us understand another CLI which can be used to run Hive Queries.
+
+There is no authentication and authorization for Hive CLI
+Hive CLI is being deprecated and it is recommended to use beeline.
+Beeline uses JDBC and connects to Hive via HiveServer2
+We can integrate Beeline with Sentry for authentication and authorization.
+You can get help over beeline using beeline --help
+
+Let us see some important beeline commands
+
+!help
+!sh
+!script
+!connect
+
+Example to connect to Hive
+!connect jdbc:hive2://nn01.itversity.com:10000/training_retail
+
+Enter OS username as username for now and hit enter for the password as we have not integrated with sentry.
+````
+````shell script
+$ beeline --help
+$ beeline -u jdbc:hive2://quickstart.cloudera:10000/
+
+beeline> !help
+beeline> !history
+# Linux shell command
+beeline> !sh ls -ltr
+# Hadoop shell command
+beeline> dfs -ls /user;
+````
+
+### Running Hive Queries Using Beeline
+````text
+Let us understand how we can use beeline to run Hive Queries.
+
+Once connected we can run all the Hive commands in beeline.
+Switch to database
+Create tables
+List tables
+and more
+````
+````iso92-sql
+USE training_retail;
+SHOW tables;
+DESCRIBE FORMATTED orders;
+````
+````shell script
+$ beeline --help
+
+$ beeline -u jdbc:hive2://quickstart.cloudera:10000/
+
+$ beeline -u jdbc:hive2://quickstart.cloudera:10000/training_retail -e "SELECT COUNT(1) AS count FROM orders"
+````
