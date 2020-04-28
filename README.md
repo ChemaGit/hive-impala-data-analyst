@@ -6,6 +6,8 @@
 - In this repository I want to share and describe all aspects to achieve 
   the CCA159 Data Analyst Cloudera certification.
 
+- Technical details about the technologies involved and a lot of exercises.
+
 - I hope this repository will be helpful for everyone who wants to achive 
   the CCA159 Data Analyst Cloudera certification.
 
