@@ -23,11 +23,13 @@ $ beeline -u jdbc:hive2://localhost:10000 --hivevar color="Yellow" -f /home/trai
 
 ### Script color_from_rgb.sql - Example in HIVE
 ````text
-SELECT color FROM wax.crayons
+file.sql
+SELECT color FROM ${hivevar:table}
 WHERE red = ${hivevar:red} AND green = ${hivevar:green} AND blue = ${hivevar:blue};
 
 $ beeline -u jdbc:hive2://localhost:10000 --hivevar red="238" \
                                           --hivevar green="32" \
                                           --hivevar blue="77" \
--f /home/training/assigments/UsingHiveAndImpalaInScriptsApplications/color_from_rgb.sql
+                                          --hivevar table="wax.crayons" \
+-f /home/training/ModernBigDataAnalysisWithSQLCloudera/AnalyzingBigDataWithSQL/UsingHiveAndImpalaInScriptsApplications/color_from_rgb.sql
 ````

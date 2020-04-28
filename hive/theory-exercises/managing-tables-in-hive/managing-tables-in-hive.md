@@ -354,7 +354,53 @@ There are no Transaction based statements such as COMMIT, ROLLBACK etc. in Hive.
 Metastore and Data are decoupled in Hive. Metastore is available in RDBMS and 
 actual business data is typically stored in HDFS.
 ````
+### Truncating And Dropping Tables in Hive
+````text
+Let us understand how to DROP tables in Hive.
+````
+We can use DROP TABLE command to drop the table… Let us drop tables orders as well as orders_stage.
+````iso92-sql
+DROP TABLE orders;
+DROP TABLE orders_stage;
+DROP DATABASE training_retail;
+-- OR
+DROP DATABASE training_retail CASCADE;
+````
+````text
+DROP TABLE on managed table will delete both metadata in metastore as well as data in HDFS, 
+while DROP TABLE on external table will only delete metadata in metastore.
+We can drop database by using DROP DATABASE Command. 
+However we need to drop all the tables in the database first.
+Here is the example to drop the database training_retail - 
+````
+````iso92-sql
+DROP DATABASE training_retail;
+````
 
+### Let us understand how to truncate tables.
+````text
+TRUNCATE works only for managed tables. Only data will be deleted, structure will be retained.
+````
+````iso92-sql
+CREATE DATABASE training_retail;
+CREATE TABLE orders (
+  order_id INT,
+  order_date STRING,
+  order_customer_id INT,
+  order_status STRING
+) ROW FORMAT DELIMITED FIELDS TERMINATED BY ',';
 
+LOAD DATA LOCAL INPATH '/data/retail_db/orders'
+INTO TABLE orders;
+
+SELECT * 
+FROM orders 
+LIMIT 10;
+
+TRUNCATE TABLE orders;
+
+SELECT * 
+FROM orders; 
+````
 
 [Hive Documetation]: https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-CreateTableCreate/Drop/TruncateTable
