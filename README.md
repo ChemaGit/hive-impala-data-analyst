@@ -3,7 +3,7 @@
 - This repository is all about Hive and Impala technologies, 
   and the CCA159 Data Analyst Cloudera certification.
 
-- In this repository I want to and share and describe all aspects to achieve 
+- In this repository I want to share and describe all aspects to achieve 
   the CCA159 Data Analyst Cloudera certification.
 
 - I hope this repository will be helpful for everyone who wants to achive 
@@ -21,7 +21,7 @@
     - Impala: Create databases, tables, HiveQL, Windowing Functions
     - Sqoop: Import, hive-import, incremental-import, Export and so on 
       (Sqoop was recently removed from the certification exam)
-    - HDFS command line
+    - HDFS command line and AWS command line
 
 - I am using the Cloudera Virtual Machine
 - You can download a docker image of the QuickstartVM
