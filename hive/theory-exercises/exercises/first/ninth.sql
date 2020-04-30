@@ -32,11 +32,11 @@ So from this data how do I get only
 ╚═════════╩════════════╩════════════╝
 */
 
-select t.name, tLbegin, t.end
-from (
-    select
+SELECT t.name, tLbegin, t.end
+FROM (
+    SELECT
         t.*,
-        lead(t.begin) over(partition by t.name order by t.begin) lead_begin
-    from mytable t
+        LEAD(t.begin) over(partition by t.name order by t.begin) lead_begin
+    FROM mytable t
 ) t
-where t.end > t.lead_begin or lead_begin is null
+WHERE t.end > t.lead_begin or lead_begin IS NULL

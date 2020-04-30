@@ -1,6 +1,7 @@
 /*
 Let us use NYSE data and see how we can create tables in Hive.
 
+
 Data Location (Local): /data/nyse_all/nyse_data
 Create a database with the name - YOUR_OS_USER_NAME_nyse
 Table Name: nyse_eod
