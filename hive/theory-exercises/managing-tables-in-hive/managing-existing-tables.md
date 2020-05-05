@@ -119,7 +119,7 @@ including deleting the data for all managed tables within the database.
 ````
 
 ### MODIFYING EXISTING TABLES
-
+````text
 After creating a table with Hive or Impala, you might need to modify the table definition. 
 This might be because there was a mistake in your CREATE TABLE statement, 
 or because the structure of the underlying data has changed, or perhaps because you need to use a different naming convention.
@@ -425,7 +425,7 @@ Just as dropping the table won't delete the data, changing the database will not
 Try moving customers, which is managed, to the dig database,and confirm that the table directory moved in that case. 
 (That is, /user/hive/warehouse/ should no longer have the customers/ subdirectory, but /user/hive/warehouse/dig.db/ should have it instead.) 
 You might need to refresh the display. Be sure to move the table back to the default database when you're done. 
-
+````
 
 
 

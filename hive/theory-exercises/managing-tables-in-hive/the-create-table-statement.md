@@ -1,5 +1,87 @@
 ## THE CREATE TABLE STATEMENT
 
+### CREATING DATABASES AND TABLES WITH SQL
+````text
+The SQL statements CREATE DATABASE and CREATE TABLE provide a more systematic way to create databases and tables. 
+These commands give you greater power and flexibility, and they can be used in other Hive and Impala interfaces besides Hue. 
+Using these commands, you also have the option to script and automate the creation 
+of databases and tables, making these tasks more reproducible. 
+
+As you go through this reading, or after you've read through it once, use the VM to create some test databases and tables. 
+You can drop the databases and tables when you're done.
+
+**Creating a Database**
+
+Creating the database is actually as simple as step 2 below. 
+Step 1 is just to get you to the place where you can run that step, and step 3 is verification of success.
+
+CREATE DATABASE test1 COMMENT "Database for trials and testing";
+
+First, get to the Impala query editor in the VM by clicking the Query button. 
+Since Hive and Impala share the Hive metastore, either will work, but using the Impala query editor is easier. 
+Enter and execute the command: 
+
+CREATE DATABASE test;
+
+**Note:** 
+
+This will create a directory in HDFS in the default location: /user/hive/warehouse/test.db.
+Verify the creation was successful using the data source panel to the left of the query editor panel. 
+Look in the Impala or Hive databases; 
+you should see six databases (default, fly, fun, test, toy, and wax). 
+If test does not appear, try refreshing the display using the refresh button (two curved arrows) at the top of this left panel. 
+If you like, you can check the HDFS file structure to see that /user/hive/warehouse/test.db exists.
+To drop your test database, enter and execute the command: 
+
+DROP DATABASE test;  
+
+**Creating a Table**
+
+This is just a quick introduction to the CREATE TABLE statement, giving the most basic structure. 
+
+Step 3 below is the actual creation step, which will be the same for any tool you use to enter SQL commands. 
+Steps 1 and 2 are to help you navigate to the appropriate area in Hue, and step 4 is verification of success.
+
+Enter and execute this command: 
+
+CREATE TABLE test (col1 INT, col2 STRING);
+
+The table name comes after CREATE TABLE, and then a list of the column names with their data types. 
+The command below creates a table named test with two columns, 
+an integer column named col1 and a string column named col2. (See Notes below.)
+Verify the creation was successful using the data source panel to the left of the query editor panel. 
+If the selected database is not Impala's default database, navigate to it and check that your table test is listed. 
+You might need to refresh the display by clicking the refresh button (the two curved arrows). 
+If you like, you can check the HDFS file structure to see that /user/hive/warehouse/test exists.
+To drop the table, enter and execute the command: 
+
+DROP TABLE test; 
+
+The table directory and any data it might have held will also be deleted. 
+After dropping the table, verify that  /user/hive/warehouse/test no longer exists.
+
+CREATE TABLE test (col1 INT, col2 STRING);
+
+**Notes:**
+
+The CREATE TABLE statement in Step 3 creates a subdirectory in the /user/hive/warehouse/directory on HDFS named test. 
+If you put this in a different database, such as the fun database, 
+the test directory will be a subdirectory of that database's directory (/user/hive/warehouse/fun.db/ for the fun database).
+You also can qualify the table name with the database name: CREATE TABLE default.test .... 
+This will put the table named test into the database default, regardless of which database is active. 
+(Try it!) You might find this a preferable method and skip step 2.
+````
+
+# PERMISSIONS TO CREATE DATABASE AND TABLES
+````text
+To create databases and tables, this requires special permissions, 
+and in a real-world environment, you might not have those permissions. 
+
+Administrators of a real-world environment can use a DCL (Data Control Language) command, GRANT, 
+to set permissions to users based on roles, groups, or individuals. 
+How this works depends on many factors, including what tools you're using and how they are configured. 
+So talk to your IT administrator if you have questions about what level of permissions you have in your work environment.
+````
 ### INTRODUCTION TO THE CREATE TABLE STATEMENT
 ````text
 CREATE TABLE dbname.tablename(col1 TYPE, col2 TYPE, ....);
