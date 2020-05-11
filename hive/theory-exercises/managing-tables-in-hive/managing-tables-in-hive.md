@@ -547,14 +547,14 @@ STORED AS TEXTFILE
 LOCATION '/user/training/json';
 
 SELECT aa FROM my_table;
-SELECT aa.a FROM my_tabel;
+SELECT aa.a FROM my_table;
 
 **Example 2**
 
 file2.json
 { "purchaseid": { "ticketnumber": "23546852222", "location": "vizag", "Travelerhistory": { "trav": { "fname": "ramu", "lname": "gogi", "travelingarea": { "destination": { "stationid": "KAJKL", "stationname": "hyd" } }, "food": { "foodpref": [{ "foodcode": "CK567", "foodcodeSegment": "NOVEG" }, { "foodcode": "MM98", "foodcodeSegment": "VEG" } ] } } } } }
 
-CREATE TABLE my_table(
+CREATE TABLE my_table2(
 purchaseid STRUCT<ticketnumber:STRING,location:STRING,
   Travelerhistory:STRUCT<
     trav:STRUCT<fname:STRING,lname:STRING,
