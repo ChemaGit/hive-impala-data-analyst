@@ -504,7 +504,7 @@ $ hdfs dfs -put ~/training_materials/analyst/data/tunnels.csv /user/hive/warehou
 	Remember that you can query this table only with Hive, not with Impala.
 ````
 ### WORKING WITH UNSTRUCTURED AND SEMI-STRUCTURED DATA
-
+````text
 The sections below describe two SerDes for working with unstructured and semi-structured data: 
 JsonSerDe and RegexSerDe.
 
@@ -526,6 +526,43 @@ CREATE TABLE dig.subscribers
 ROW FORMAT SERDE 'org.apache.hive.hcatalog.data.JsonSerDe';
 
 The table would include the correct data, even though the records were not organized exactly the same.
+
+**Example 1**
+
+file.json
+
+{"aa": {"a": "A","b": "B","c": "C","d": [{"d_1": "D-1","d_2": "D-2"}],"e": "E"}}
+{"aa": {"a": "AA","b": "BB","c": "CC","d": [{"d_1": "DD-11","d_2": "DD-22"}],"e": "EE"}}
+
+CREATE TABLE my_table(aa struct<
+    a:string,
+    b:string,
+    c:string,
+    d:array<struct<
+        d_1:string,
+        d_2:string>>,
+    e:string>)
+ROW FORMAT SERDE 'org.apache.hive.hcatalog.data.JsonSerDe'
+STORED AS TEXTFILE
+LOCATION '/user/training/json';
+
+SELECT aa FROM my_table;
+SELECT aa.a FROM my_tabel;
+
+**Example 2**
+
+file2.json
+{ "purchaseid": { "ticketnumber": "23546852222", "location": "vizag", "Travelerhistory": { "trav": { "fname": "ramu", "lname": "gogi", "travelingarea": { "destination": { "stationid": "KAJKL", "stationname": "hyd" } }, "food": { "foodpref": [{ "foodcode": "CK567", "foodcodeSegment": "NOVEG" }, { "foodcode": "MM98", "foodcodeSegment": "VEG" } ] } } } } }
+
+CREATE TABLE my_table(
+purchaseid STRUCT<ticketnumber:STRING,location:STRING,
+  Travelerhistory:STRUCT<
+    trav:STRUCT<fname:STRING,lname:STRING,
+        travelingarea:STRUCT< destination :STRUCT<stationid:string,stationname:string>>,
+    food :STRUCT<foodpref:ARRAY<STRUCT<foodcode:string,foodcodeSegment:string>>>
+    >>>)
+ROW FORMAT SERDE 'org.apache.hive.hcatalog.data.JsonSerDe' 
+LOCATION '/user/training/json2/';
 
 **RegexSerDe**
 
@@ -628,5 +665,5 @@ WITH SERDEPROPERTIES ("input.regex"="(\\d{7})(\\d{7})(\\d{8})(\\d{6})(.{20})(\\w
 9. Optional: You can drop the table if you like. 
    If you used EXTERNAL as noted above, dropping the table will not delete the table, 
    so you can come back and recreate it later, if you like.
-
+````
 [Hive Documetation]: https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-CreateTableCreate/Drop/TruncateTable
