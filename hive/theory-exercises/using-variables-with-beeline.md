@@ -32,4 +32,13 @@ $ beeline -u jdbc:hive2://localhost:10000 --hivevar red="238" \
                                           --hivevar blue="77" \
                                           --hivevar table="wax.crayons" \
 -f /home/training/ModernBigDataAnalysisWithSQLCloudera/AnalyzingBigDataWithSQL/UsingHiveAndImpalaInScriptsApplications/color_from_rgb.sql
+
+-- Example with ARRAY
+my_file.sql
+select '${hivevar:red}';
+beeline -u jdbc:hive2://localhost:10000 --hivevar red=ARRAY['1','2','3'] -f my_sql.sql
+
+my_file.sql
+select SPLIT('${hivevar:red}',',');
+beeline -u jdbc:hive2://localhost:10000 --hivevar red="rojo, amarillo, azul" -f my_sql.sql
 ````
