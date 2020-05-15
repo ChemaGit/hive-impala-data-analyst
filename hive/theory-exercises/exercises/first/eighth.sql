@@ -1,4 +1,4 @@
-/*
+/**
 Let us use NYSE data and see how we can create tables in Hive.
 
 

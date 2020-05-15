@@ -36,7 +36,7 @@ SELECT t.name, tLbegin, t.end
 FROM (
     SELECT
         t.*,
-        LEAD(t.begin) over(partition by t.name order by t.begin) lead_begin
+        LEAD(t.begin) over(PARTITION BY t.name ORDER BY t.begin) lead_begin
     FROM mytable t
 ) t
-WHERE t.end > t.lead_begin or lead_begin IS NULL
+WHERE t.END > t.lead_begin or lead_begin IS NULL
