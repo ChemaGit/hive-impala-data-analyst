@@ -17,5 +17,5 @@ Validation
 Run the following queries to ensure that you will be able to read the data.
 
 SELECT * FROM YOUR_OS_USER_NAME_nyse.nyse_eod;
-SELECT count(1) FROM YOUR_OS_USER_NAME_nyse.nyse_eod;
+SELECT count(*) FROM YOUR_OS_USER_NAME_nyse.nyse_eod;
 */
