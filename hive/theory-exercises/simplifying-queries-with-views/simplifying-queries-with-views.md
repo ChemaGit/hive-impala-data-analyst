@@ -185,7 +185,7 @@ into one single set of operations so that the result can be generated as efficie
 ````
 
 ### THE ORDER BY CLAUSE IN VIEWS
-
+````text
 The stored query for a view can be any query—it can use any of the allowed clauses of a SELECT statement. 
 However, using the ORDER BY clause in a view’s stored query is not recommended. 
 Sorting (arranging) result rows in order is an action best performed 
@@ -282,3 +282,4 @@ If you are using Hue, click the Show Logs button on the upper right;
 the warning should be visible at the bottom of the logs.
 
 8. You can drop the view if you like.
+````
