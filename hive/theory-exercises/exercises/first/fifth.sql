@@ -90,7 +90,8 @@ SELECT TAB.*, last7days_closing-closing_price AS diff_last7days_price  FROM (
 -- Query 3
 
 SELECT TAB.* FROM
-       (SELECT exchanged, stock_symbol, closing_date, closing_price,LEAD(closing_price,1) OVER (PARTITION BY stock_symbol ORDER BY closing_date) AS following_day_price,
+       (SELECT exchanged, stock_symbol, closing_date,
+       closing_price,LEAD(closing_price,1) OVER (PARTITION BY stock_symbol ORDER BY closing_date) AS following_day_price,
           CASE (LEAD(closing_price,1) OVER (PARTITION BY stock_symbol ORDER BY closing_date) - closing_price) >= 0
             WHEN true THEN "Higher or equal"
             WHEN false THEN "Lower"
