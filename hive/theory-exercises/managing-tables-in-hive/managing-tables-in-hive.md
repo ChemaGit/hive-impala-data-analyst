@@ -412,6 +412,8 @@ CREATE EXTERNAL TABLE dbname.tablename (col1 TYPE, col2 TYPE, ...)
 	STORED AS ...
 	LOCATION ...
 	TBLPROPERTIES('skip.header.line.count'='1');
+	
+TBLPROPERTIES: [https://github.com/apache/hive/search?p=1&q=TBLPROPERTIES&utf8=%E2%9C%93][TBL PROPERTIES]	
 
 # USING HIVE SERDES
 ````text
@@ -667,3 +669,5 @@ WITH SERDEPROPERTIES ("input.regex"="(\\d{7})(\\d{7})(\\d{8})(\\d{6})(.{20})(\\w
    so you can come back and recreate it later, if you like.
 ````
 [Hive Documetation]: https://cwiki.apache.org/confluence/display/Hive/LanguageManual+DDL#LanguageManualDDL-CreateTableCreate/Drop/TruncateTable
+
+[TBL PROPERTIES]: https://github.com/apache/hive/search?p=1&q=TBLPROPERTIES&utf8=%E2%9C%93
