@@ -38,10 +38,71 @@ Explanation
 
 The Binary Tree below illustrates the sample:
 
-			5
-		       / \
+			            5
+		               / \
                       /   \
                      2     8
                     / \   / \
                    1   3 6   9
+
+1 Leaf
+2 Inner
+3 Leaf
+4 Inner
+5 Leaf
+6 Inner
+7 Leaf
+8 Leaf
+9 Inner
+10 Leaf
+11 Inner
+12 Leaf
+13 Inner
+14 Leaf
+15 Inner
+15 Root
+
+1 Leaf
+2 Inner
+3 Leaf
+4 Inner
+5 Leaf
+6 Inner
+7 Leaf
+8 Leaf
+9 Inner
+10 Leaf
+11 Inner
+12 Leaf
+13 Inner
+14 Leaf
+15 Root
 */
+
+CREATE TABLE binary_tree (
+ node INT,
+ parent INT
+);
+INSERT INTO binary_tree VALUES(1,2),(3,2),(6,8),(9,8),(2,5),(8,5),(5, null);
+
+CREATE TABLE binary_tree (
+ node INT,
+ parent INT
+);
+INSERT INTO binary_tree VALUES(1,2),(3,2),(6,8),(9,8),(2,5),(8,5),(5, null);
+
+SELECT t.node, t.roll
+FROM
+(SELECT node, 'Root' AS roll
+FROM binary_tree
+WHERE parent is null
+UNION
+SELECT node, 'Leaf' AS roll
+FROM binary_tree
+WHERE node NOT IN(SELECT parent FROM binary_tree WHERE parent IS NOT null)
+UNION
+SELECT node, 'Inner' AS roll
+FROM binary_tree
+WHERE node in(SELECT parent FROM binary_tree WHERE parent IS NOT null) AND
+      node not in(SELECT node FROM binary_tree WHERE parent is null)) AS t
+ORDER BY node;

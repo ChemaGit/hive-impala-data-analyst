@@ -38,10 +38,25 @@ Explanation
 
 The Binary Tree below illustrates the sample:
 
-			5
-		       / \
+			            5
+		               / \
                       /   \
                      2     8
                     / \   / \
                    1   3 6   9
 */
+SELECT t.node, t.roll
+FROM
+(SELECT node, 'Root' AS roll
+FROM binary_tree
+WHERE parent is null
+UNION
+SELECT node, 'Leaf' AS roll
+FROM binary_tree
+WHERE node NOT IN(SELECT parent FROM binary_tree WHERE parent IS NOT null)
+UNION
+SELECT node, 'Inner' AS roll
+FROM binary_tree
+WHERE node in(SELECT parent FROM binary_tree WHERE parent IS NOT null) AND
+      node not in(SELECT node FROM binary_tree WHERE parent is null)) AS t
+ORDER BY node;
