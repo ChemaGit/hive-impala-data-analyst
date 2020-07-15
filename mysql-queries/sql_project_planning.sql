@@ -115,27 +115,10 @@ OUTPUT
 
 
 SELECT Start_date, End_Date FROM(
-SELECT Start_Date, MIN(End_Date) AS End_Date, DATEDIFF(MIN(End_Date), Start_Date) AS task_duration
+SELECT Start_Date, MIN(End_Date) AS End_Date, DATEDIFF(MIN(End_Date), Start_Date) AS project_duration
 FROM
     (SELECT Start_Date FROM Projects WHERE Start_Date NOT IN (SELECT End_Date FROM Projects)) a,
     (SELECT End_Date FROM Projects WHERE End_Date NOT IN (SELECT Start_Date FROM Projects)) b
 WHERE Start_Date < End_Date
 GROUP BY Start_Date
-ORDER BY task_duration ASC, Start_Date ASC) t;
-
-+------------+------------+---------------+
-| Start_Date | End_Date   | task_duration |
-+------------+------------+---------------+
-| 2015-10-15 | 2015-10-16 |             1 |
-| 2015-10-17 | 2015-10-18 |             1 |
-| 2015-10-19 | 2015-10-20 |             1 |
-| 2015-10-21 | 2015-10-22 |             1 |
-| 2015-11-01 | 2015-11-02 |             1 |
-| 2015-11-17 | 2015-11-18 |             1 |
-| 2015-10-11 | 2015-10-13 |             2 |
-| 2015-11-11 | 2015-11-13 |             2 |
-| 2015-10-01 | 2015-10-05 |             4 |
-| 2015-11-04 | 2015-11-08 |             4 |
-| 2015-10-25 | 2015-10-31 |             6 |
-+------------+------------+---------------+
-
+ORDER BY project_duration ASC, Start_Date ASC) t;
