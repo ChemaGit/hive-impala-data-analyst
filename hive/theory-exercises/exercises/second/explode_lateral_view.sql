@@ -63,3 +63,28 @@ ORDER BY color_id;
 | 9         | yellow      |
 +-----------+-------------+--+
 */
+
+-- doing the same in one shot, though is not a light-weight query
+SELECT tc1.color_id, tc2.color_name
+FROM (SELECT ROW_NUMBER() OVER() AS rownum, CAST(color_id AS INT) as color_id
+      FROM colors
+      LATERAL VIEW EXPLODE(SPLIT(CONCAT(color_code,'|', fav_color_code),'\\|')) a1 AS color_id) AS tc1
+JOIN (SELECT ROW_NUMBER() OVER() AS rownum, color_name
+      FROM colors
+      LATERAL VIEW EXPLODE(SPLIT(CONCAT(color_code_name,'|', fav_color_name),'\\|')) a1 AS color_name) AS tc2
+ON(tc1.rownum = tc2.rownum)
+ORDER BY tc1.color_id;
+/*
++---------------+-----------------+--+
+| tc1.color_id  | tc2.color_name  |
++---------------+-----------------+--+
+| 1             | blue            |
+| 2             | white           |
+| 3             | green           |
+| 4             | red             |
+| 5             | black           |
+| 7             | pink            |
+| 9             | yellow          |
++---------------+-----------------+--+
+*/
+
