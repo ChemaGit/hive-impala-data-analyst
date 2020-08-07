@@ -134,4 +134,35 @@ HAVING (SUM(total_submissions) +
 ORDER BY contest_id;
 
 
+SELECT t1.contest_id, t1.hacker_id, t1.name,
+       t2.sum_total_submissions AS sts,
+       t2.sum_total_accepted_submissions AS stab,
+       t1.sum_total_views AS stv,
+       t1.sum_unique_views AS suv
+ FROM
+(SELECT t.contest_id, t.hacker_id, t.name, t.college_id,
+    SUM(t.total_views) sum_total_views, SUM(t.total_unique_views) AS sum_unique_views
+FROM(
+SELECT DISTINCT c.contest_id, c.hacker_id, c.name, cl.college_id,
+    total_views, total_unique_views
+FROM Contests c
+JOIN Colleges co ON (c.contest_id = co.contest_id)
+JOIN Challenges cl ON (co.college_id = cl.college_id)
+LEFT OUTER JOIN View_Stats vs ON(vs.challenge_id = cl.challenge_id)) t
+GROUP BY t.contest_id, t.hacker_id, t.name, t.college_id) t1
+LEFT OUTER JOIN (SELECT c.contest_id, c.hacker_id, c.name, col.college_id,cl.challenge_id,
+       SUM(total_submissions) AS sum_total_submissions ,SUM(total_accepted_submissions) AS sum_total_accepted_submissions
+FROM Contests c
+JOIN Colleges col ON(c.contest_id = col.contest_id)
+JOIN Challenges cl ON(col.college_id = cl.college_id)
+JOIN Submission_Stats ss ON(cl.challenge_id = ss.challenge_id)
+GROUP BY c.contest_id,c.hacker_id,c.name,col.college_id,cl.challenge_id) t2
+ON(t1.contest_id = t2.contest_id)
+HAVING (t2.sum_total_submissions +
+       t2.sum_total_accepted_submissions +
+       t1.sum_total_views +
+       t1.sum_unique_views) > 0
+ORDER BY t1.contest_id;
+
+
 
