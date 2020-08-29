@@ -27,3 +27,41 @@ Let us look into the optimization techniques we are going to cover:
     - Join Optimizations
     - Cost-based Optimizer
 ````
+
+### Partitioning
+````text   
+Partitioning divides the table into parts based on the values of particular columns. 
+A table can have multiple partition columns to identify a particular partition. 
+Using partition it is easy to do queries on slices of the data. 
+The data of the partition columns are not saved in the files. 
+On checking the file structure you would notice that it creates folders 
+on the basis of partition column values. This makes sure that only relevant data is read 
+for the execution of a particular job, decreasing the I/O time required by the query. 
+Thus, increasing the query performance.
+   
+When we query data on a partitioned table, it will only scan the relevant partitions 
+to be queried and skips irrelevant partitions. Now, assume that even on partitioning, 
+the data in a partition was quite big, to further divide it into more manageable chunks we can use Bucketing.
+````
+````mysql-sql
+CREATE TABLE table_name 
+(column1 data_type, column2 data_type, …) 
+PARTITIONED BY (partition1 data_type, partition2 data_type,….);
+````
+````text
+- Partition Columns are not defined in the Column List of the table.
+- In insert queries, partitions are mentioned in the start and 
+  their column values are also given along with the values of the other columns but at the end.
+````
+````mysql-sql
+INSERT INTO TABLE table_name PARTITION (partition1 = ‘partition1_val’, partition2 = ‘partition2_val’, …) 
+VALUES (col1_val, col2_val, …, partition1_val, partition2_val, …);
+````
+````text
+- Partitioning is basically of two types: Static and Dynamic. 
+  Well, names are very much self-explanatory.
+
+ * Static Partitioning
+   This is practiced when we have knowledge about the partitions of data we are going to load. 
+   It should be preferred when loading data in a table from large files. It is performed in strict mode:
+````
