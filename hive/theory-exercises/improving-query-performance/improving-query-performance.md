@@ -74,7 +74,9 @@ When you run a query from one of these clients, the Hive server performs several
 It parses the SQL, retrieves metadata from the metastore, and plans the execution of the query. 
 These steps are relatively fast; they might take only a small fraction of a second for a simple query. 
 See the first column, “Steps Run by Hive Server,” of Figure 1.
-
+````
+![alt text](UnderstandingMapTasksAndReduceTasks.png)
+````text
 Figure 1: Hive process overview
 
 Then the Hive server submits one or more jobs to the cluster. 
@@ -94,7 +96,9 @@ This model provides a way to divide a large data processing job
 into a sequence of smaller tasks that can run in parallel across a large number of computers. 
 A MapReduce job is divided into two types of tasks: map tasks and reduce tasks. 
 These tasks are sequenced in phases.
-
+````
+![alt text](UnderstandingMapTasksAndReduceTasks2.png)
+````text
 Figure 2: Map-reduce job within the Hive process
 
 - A map phase runs first. 
@@ -114,7 +118,9 @@ SELECT upper(sales_rep), SUM(amount) AS high_sales
     FROM order_info
     WHERE amount > 1000
     GROUP BY upper(sales_rep);
-
+````
+![alt text](input-data.png)
+````text
 Figure 3: Example input data
 
 Notice that salespeople can have multiple orders. 
@@ -126,7 +132,9 @@ In the map phase of the MapReduce job, the individual map tasks each receive a p
 The number of map tasks is determined primarily by the total size of the input data. 
 The example in Figure 4 shows five parallel map tasks, 
 but with a very large input dataset, there could be hundreds or thousands. 
-
+````
+![alt text](map-output.png)
+````text
 Figure 4: Map output
 
 - The map tasks process the input records. 
@@ -143,13 +151,18 @@ The process also sorts the data by the column or columns that the data is groupe
 which in this example is the sales_rep column. 
 Notice here that the records for Alice are grouped together, the records for Carlos are grouped together, and so on. 
 But the result is not globally ordered—notice here that Carlos comes before Bob. 
-
+````
+![alt text](shuffle-and-sort.png)
+````text
 Figure 5: Shuffle and sort
 
 The reduce tasks are where aggregation is performed; in this example, 
 they compute the sum of the order amounts for each salesperson. 
 The number of reduce tasks is determined by the configuration of Hive or MapReduce, 
 and it’s almost always much smaller than the number of map tasks. 
+````
+![alt text](reduce-output.png)
+````
 This example (Figure 6) shows two reduce tasks. 
 The outputs from the reduce tasks are appended together to produce the query result. 
 ````
@@ -302,7 +315,9 @@ such as the number of rows in the table, the number of files that store the tabl
 and the number of unique values in each column in the table. 
 These statistics can be used to optimize Hive queries, 
 but further discussion of that is beyond the scope of this course.
-
+````
+![alt text](hive_query_execution_plan.png)
+````text
 - Impala Execution
 Impala's output of the EXPLAIN statement for the example is shown here:
 
@@ -341,6 +356,8 @@ EXPLAIN SELECT COUNT(f.flight) FROM flights f
     JOIN planes p ON (f.tailnum = p.tailnum)
     WHERE p.year < 1968;
 ````
+![alt text](impala_query_execution_plan.png)
+
 
 ### TABLE AND COLUMNS STATISTICS
 ````text
