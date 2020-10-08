@@ -19,5 +19,18 @@ Sample Output
 20 20
 20 21
 22 23
-
 */
+
+CREATE TABLE Functions(
+  X INTEGER,
+  Y INTEGER
+);
+
+INSERT INTO Functions VALUES(20,20),(20,20),(20,21),(23,22),(22,23),(21,20);
+
+SELECT f1.X, f1.Y
+FROM Functions f1
+INNER JOIN Functions f2 ON f1.X = f2.Y AND f1.Y = f2.X
+GROUP BY f1.X, f1.Y
+HAVING COUNT(f1.X) > 1 OR f1.X < f1.Y
+ORDER BY f1.X;
