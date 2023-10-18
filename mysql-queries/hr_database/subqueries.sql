@@ -73,5 +73,100 @@ WHERE e.salary = j.min_salary;
 SELECT first_name, last_name, salary
 FROM employees e
 WHERE salary > (SELECT AVG(salary) FROM employees) AND
-      department_id IN(SELECT department_id FROM departments WHERE department_name LIKE('IT%'))
+      department_id IN(SELECT department_id FROM departments WHERE department_name LIKE('IT%'));
 
+/*
+8. Write a query to find the name (first_name, last_name), and salary of the employees who earns more than the earning of Mr. Bell.
+*/
+SELECT first_name, last_name, salary
+FROM employees
+WHERE salary > (SELECT salary FROM employees WHERE last_name = 'Bell');
+/*
+9. Write a query to find the name (first_name, last_name), and salary of the employees who earn the same salary as the minimum salary for all departments.
+*/
+SELECT first_name, last_name, salary
+FROM employees
+WHERE salary =(SELECT MIN(salary)
+                FROM employees);
+/*
+10. Write a query to find the name (first_name, last_name), and salary of the employees whose salary is greater than the average salary of all departments.
+*/
+SELECT first_name, last_name, salary
+FROM employees
+WHERE salary > ALL(SELECT AVG(salary) FROM employees GROUP BY department_id);
+/*
+11. Write a query to find the name (first_name, last_name) and salary of the employees
+who earn a salary that is higher than the salary of all the Shipping Clerk (JOB_ID = 'SH_CLERK').
+Sort the results of the salary of the lowest to highest.
+*/
+SELECT first_name, last_name,job_id, salary
+FROM employees
+WHERE salary > (SELECT MAX(salary) FROM employees WHERE job_id = 'SH_CLERK')
+ORDER BY salary;
+
+SELECT first_name,last_name, job_id, salary
+FROM employees
+WHERE salary >
+ALL (SELECT salary FROM employees WHERE job_id = 'SH_CLERK') ORDER BY salary;
+
+/*
+12. Write a query to find the name (first_name, last_name) of the employees who are not supervisors.
+*/
+SELECT first_name, last_name
+FROM employees
+WHERE employee_id NOT IN(SELECT DISTINCT(manager_id) FROM employees);
+
+SELECT b.first_name,b.last_name
+FROM employees b
+WHERE NOT EXISTS (SELECT 'X' FROM employees a WHERE a.manager_id = b.employee_id);
+
+/*
+13. Write a query to display the employee ID, first name, last name, and department names of all employees.
+*/
+SELECT employee_id, first_name, last_name, department_name
+FROM employees e
+JOIN  departments d ON(e.department_id = d.department_id)
+ORDER BY department_name;
+
+SELECT employee_id, first_name, last_name,
+(SELECT department_name FROM departments d
+ WHERE e.department_id = d.department_id) department
+ FROM employees e ORDER BY department;
+/*
+14. Write a query to display the employee ID, first name, last name, salary of all employees whose salary is above average for their departments.
+*/
+SELECT employee_id, first_name, last_name, salary
+FROM employees e
+JOIN (SELECT department_id, ROUND(AVG(salary), 2) AS avg_salary
+FROM employees
+GROUP BY department_id) avg ON(e.department_id = avg.department_id)
+WHERE e.salary > avg.avg_salary
+ORDER BY e.employee_id;
+
+SELECT employee_id, first_name
+FROM employees AS A
+WHERE salary > (SELECT AVG(salary) FROM employees WHERE department_id = A.department_id)
+ORDER BY employee_id;
+
+/*
+15. Write a query to fetch even numbered records from employees table.
+*/
+SET @row_number = 0;
+SELECT row_number, first_name, last_name, salary
+FROM (SELECT @row_number := @row_number + 1 AS row_number, first_name, last_name, salary
+     FROM employees) t
+WHERE row_number MOD 2 = 0;
+
+/*
+16. Write a query to find the 5th maximum salary in the employees table.
+*/
+SET @row_number = 0;
+SELECT row_number, first_name, last_name, salary, job_id
+FROM (SELECT @row_number := @row_number + 1 AS row_number, first_name, last_name, salary, job_id
+      FROM employees
+      ORDER BY salary DESC) t
+WHERE row_number = 5;
+
+/*
+17. Write a query to find the 4th minimum salary in the employees table.
+*/

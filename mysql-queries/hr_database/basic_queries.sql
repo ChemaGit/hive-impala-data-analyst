@@ -1,7 +1,7 @@
 /*
 1. Write a query to display the names (first_name, last_name) using alias name “First Name", "Last Name" from employees table
 */
-SELECT first_name AS "First Name", last_name AS "Last Name"
+SELECT first_name AS FirstName, last_name AS LastName
 FROM employees;
 
 /*
