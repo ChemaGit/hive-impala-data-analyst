@@ -15,7 +15,7 @@ SELECT * FROM employees ORDER BY fitst_name DESC;
 /*
 4. Write a query to get the names (first_name, last_name), salary, PF of all the employees (PF is calculated as 15% of salary)
 */
-SELECT first_name, last_name, salary, salary * 0.01 AS PF FROM employees;
+SELECT first_name, last_name, salary, salary * 0.015 AS PF FROM employees;
 /*
 5. Write a query to get the employee ID, names (first_name, last_name), salary in ascending order of salary.
 */
